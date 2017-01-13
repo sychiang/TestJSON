@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 for(int i = 0; i<responseObj.length;i++){
                     responselist.add(responseObj[i]);
                 }
-
             }
 
             @Override
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Conn Fail, statuscode:" + statusCode);
             }
         });*/
+        //Testing GitHub
 
         AndroidNetworking.initialize(getApplicationContext());
         AndroidNetworking.get(url)
