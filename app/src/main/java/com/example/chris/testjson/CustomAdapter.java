@@ -59,7 +59,7 @@ public class CustomAdapter extends BaseAdapter {
         Picasso.with(context).load(imgURL).into(image);
         type.setText(item.getAnimal_kind());
         age.setText(item.getAnimal_age());
-        location.setText(item.getAnimal_place());
+        location.setText(item.getShelter_name().substring(0,3));
         date.setText(item.getAnimal_opendate());
         return rowView;
     }

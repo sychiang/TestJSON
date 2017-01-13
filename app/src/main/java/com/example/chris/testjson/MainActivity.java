@@ -1,7 +1,10 @@
 package com.example.chris.testjson;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -22,20 +25,22 @@ import java.util.List;
 //import cz.msebera.android.httpclient.entity.mime.Header;
 
 public class MainActivity extends AppCompatActivity {
-
-    ListView listviw;
+    ArrayList<String> petidlist;
+    ListView listview;
+    CustomAdapter adapter;
     Response[] responseObj;
     List<Response> responselist;
-    CustomAdapter adapter;
     Gson gson = new Gson();
-    String url = "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
     AsyncHttpClient client = new AsyncHttpClient();
+    //String url = "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
+    String url = "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=50";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listviw = (ListView) findViewById(R.id.petlist);
+        listview = (ListView) findViewById(R.id.petlist);
         //client.setBasicAuth("iiisyc92","P@ssw0rd92/token"); 如果存取資料需要有帳號密碼, 要寫這行
         /*client.get(MainActivity.this, url, new AsyncHttpResponseHandler() {
             @Override
@@ -68,9 +73,12 @@ public class MainActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        for(Response rs : response){
+                                            petidlist.add(rs.getAnimal_id());
+                                        }
                                         //setupRecyclerView(response);
                                         adapter = new CustomAdapter(MainActivity.this, response);
-                                        listviw.setAdapter(adapter);
+                                        listview.setAdapter(adapter);
                                     }
                                 });
                             }
@@ -80,7 +88,17 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         });
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putString(CDictionary.BK_animalid, petidlist.get(position));
+                Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
+            }
+        });
 
     }
 }

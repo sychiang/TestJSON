@@ -24,10 +24,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //取JSON的lib
+    //取回資料中圖檔(透過網址)
+    //另一個取JSON的lib
     compile 'com.android.support:appcompat-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.loopj.android:android-async-http:1.4.9'  //取JSON的lib
-    compile 'com.squareup.picasso:picasso:2.5.2'  //取回資料中圖檔(透過網址)
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'nl.littlerobots.cupboard-tools:gson:0.3.1'
-    compile 'com.amitshekhar.android:android-networking:0.3.0' //另一個取JSON的lib
+    compile 'com.amitshekhar.android:android-networking:0.3.0'
+    compile 'com.android.support:design:25.1.0'
+    testCompile 'junit:junit:4.12'
 }
