@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
         //Testing GitHub
+        //Testing GitHub from Mac
 
         AndroidNetworking.initialize(getApplicationContext());
         AndroidNetworking.get(url)
