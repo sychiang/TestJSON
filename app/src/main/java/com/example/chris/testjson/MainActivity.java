@@ -3,6 +3,7 @@ package com.example.chris.testjson;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,16 +26,15 @@ import java.util.List;
 //import cz.msebera.android.httpclient.entity.mime.Header;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> petidlist;
+    ArrayList<String> petidlist = new ArrayList<String>();
+    ArrayList<Response> petlist;
     ListView listview;
     CustomAdapter adapter;
     Response[] responseObj;
-    List<Response> responselist;
     Gson gson = new Gson();
     AsyncHttpClient client = new AsyncHttpClient();
     //String url = "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
     String url = "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=50";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,36 +69,33 @@ public class MainActivity extends AppCompatActivity {
                              },
                         new ParsedRequestListener<ArrayList<Response>>() {
                             @Override
-                            public void onResponse(final ArrayList<Response> response) {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        for(Response rs : response){
-                                            petidlist.add(rs.getAnimal_id());
-                                        }
-                                        //setupRecyclerView(response);
-                                        adapter = new CustomAdapter(MainActivity.this, response);
-                                        listview.setAdapter(adapter);
-                                    }
-                                });
+                            public void onResponse( ArrayList<Response> response) {
+                                //setupRecyclerView(response);
+                                for(Response rs : response){
+                                    petidlist.add(rs.getAnimal_id());
+                                    Log.d("Debug",rs.getAnimal_id());
+                                }
+                                adapter = new CustomAdapter(MainActivity.this, response);
+                                listview.setAdapter(adapter);
                             }
-
                             @Override
                             public void onError(ANError anError) {
-
                             }
                         });
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putString(CDictionary.BK_animalid, petidlist.get(position));
+                Log.d("Debug",petidlist.get(position));
+                //Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
+                //Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-
             }
         });
-
     }
+
 }

@@ -49,18 +49,48 @@ public class CustomAdapter extends BaseAdapter {
 
         Response item = (Response) getItem(position);
 
-        ImageView image = (ImageView) rowView.findViewById(R.id.image);
-        TextView type = (TextView) rowView.findViewById(R.id.type);
-        TextView age = (TextView) rowView.findViewById(R.id.age);
-        TextView location = (TextView) rowView.findViewById(R.id.location);
-        TextView date = (TextView) rowView.findViewById(R.id.date);
+        ImageView ivImage = (ImageView) rowView.findViewById(R.id.image);
+        TextView tvType = (TextView) rowView.findViewById(R.id.type);
+        TextView tvAge = (TextView) rowView.findViewById(R.id.age);
+        TextView tvLocation = (TextView) rowView.findViewById(R.id.location);
+        TextView tvDate = (TextView) rowView.findViewById(R.id.date);
+
+        String bodytype="";
+        switch (item.getAnimal_bodytype()){
+            case "MINI":
+                bodytype = "MINI";
+                break;
+            case "SMALL":
+                bodytype = "小型";
+                break;
+            case "MEDIUM":
+                bodytype = "中型";
+                break;
+            case "BIG":
+                bodytype = "大型";
+                break;
+             default:
+                bodytype = "一般";
+        }
+        String age="";
+        switch (item.getAnimal_age()){
+            case "ADULT":
+                age = "成年";
+                break;
+            case "CHILD":
+                age = "幼年";
+                break;
+            default:
+                age = "";
+        }
+
 
         String imgURL = item.getAlbum_file();
-        Picasso.with(context).load(imgURL).into(image);
-        type.setText(item.getAnimal_kind());
-        age.setText(item.getAnimal_age());
-        location.setText(item.getShelter_name().substring(0,3));
-        date.setText(item.getAnimal_opendate());
+        Picasso.with(context).load(imgURL).into(ivImage);
+        tvType.setText(bodytype+item.getAnimal_kind());
+        tvAge.setText(age);
+        tvLocation.setText(item.getShelter_name().substring(0,3));
+        tvDate.setText(item.getAnimal_opendate());
         return rowView;
     }
 }
