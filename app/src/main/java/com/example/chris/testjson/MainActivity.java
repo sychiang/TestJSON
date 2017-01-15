@@ -142,20 +142,18 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
         // 滑到底部後自動加載，判斷listview已經停止滾動並且最後可視的條目等於adapter的條目
         if (scrollState == OnScrollListener.SCROLL_STATE_IDLE
                 && lastVisibleIndex == adapter.getCount()) {
-            // 當滑到底部時自動加載
-            // pg.setVisibility(View.VISIBLE);
-            // bt.setVisibility(View.GONE);
-            // handler.postDelayed(new Runnable() {
-            //
-            // @Override
-            // public void run() {
-            // loadMoreDate();
-            // bt.setVisibility(View.VISIBLE);
-            // pg.setVisibility(View.GONE);
-            // mSimpleAdapter.notifyDataSetChanged();
-            // }
-            //
-            // }, 2000);
+             //當滑到底部時自動加載
+             pg.setVisibility(View.VISIBLE);
+             btn_load.setVisibility(View.GONE);
+             handler.postDelayed(new Runnable() {
+             @Override
+             public void run() {
+             loadMoreDate();
+             btn_load.setVisibility(View.VISIBLE);
+             pg.setVisibility(View.GONE);
+             adapter.notifyDataSetChanged();
+             }
+             }, 2000);
         }
     }
 
