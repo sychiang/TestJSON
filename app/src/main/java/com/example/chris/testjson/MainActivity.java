@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
                                         handler.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
-                                                loadMoreDate();// 加載更多數據
+                                                loadMoreData();// 加載更多數據
                                                 btn_load.setVisibility(View.VISIBLE);
                                                 pg.setVisibility(View.GONE);
                                                 adapter.notifyDataSetChanged();// 通知listView刷新數據
                                             }
-                                        }, 2000);
+                                        }, 1000);
                                     }
                                 });
                             }
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
             }
         });
     }
-    private void loadMoreDate() {
+    private void loadMoreData() {
         int count = adapter.getCount();
         if (count + 5 < MaxDataNum) {
             // 每次加載5條
@@ -148,12 +148,12 @@ public class MainActivity extends AppCompatActivity implements OnScrollListener{
              handler.postDelayed(new Runnable() {
              @Override
              public void run() {
-             loadMoreDate();
+             loadMoreData();
              btn_load.setVisibility(View.VISIBLE);
              pg.setVisibility(View.GONE);
              adapter.notifyDataSetChanged();
              }
-             }, 2000);
+             }, 1000);
         }
     }
 

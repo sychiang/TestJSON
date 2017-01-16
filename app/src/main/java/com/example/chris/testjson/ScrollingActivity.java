@@ -105,8 +105,10 @@ public class ScrollingActivity extends AppCompatActivity {
                                     tvShelterTel.setText(rs.getShelter_tel());
                                     tvShelterAddress.setText(rs.getShelter_address());
                                     tvRemark.setText(rs.getAnimal_remark());
-                                    Picasso.with(ScrollingActivity.this).load(rs.getAlbum_file())
-                                            .into(ivPhoto);
+                                    if(rs.getAlbum_file().length()>0){
+                                        Picasso.with(ScrollingActivity.this).load(rs.getAlbum_file())
+                                                .into(ivPhoto);
+                                    }
                                 }
                             }
                             @Override
