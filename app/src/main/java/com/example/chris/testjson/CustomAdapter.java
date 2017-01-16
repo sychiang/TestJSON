@@ -86,7 +86,10 @@ public class CustomAdapter extends BaseAdapter {
 
 
         String imgURL = item.getAlbum_file();
-        Picasso.with(context).load(imgURL).into(ivImage);
+        if(imgURL.length()>0){
+            Picasso.with(context).load(imgURL).into(ivImage);
+        }
+        
         tvType.setText(bodytype+item.getAnimal_kind());
         tvAge.setText(age);
         tvLocation.setText(item.getShelter_name().substring(0,3));
