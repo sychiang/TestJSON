@@ -20,6 +20,7 @@
             android:layout_height="800px"
             android:scaleType="fitCenter"
             android:src="@drawable/images4"
+            android:visibility="invisible"
             android:layout_marginBottom="20dp" />
 
         <LinearLayout

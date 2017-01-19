@@ -108,6 +108,7 @@ public class ScrollingActivity extends AppCompatActivity {
                                     if(rs.getAlbum_file().length()>0){
                                         Picasso.with(ScrollingActivity.this).load(rs.getAlbum_file())
                                                 .into(ivPhoto);
+                                        ivPhoto.setVisibility(View.VISIBLE);
                                     }
                                 }
                             }
